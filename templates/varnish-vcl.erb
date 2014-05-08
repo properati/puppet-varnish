@@ -143,6 +143,13 @@ sub vcl_fetch {
   # Default grace period
   set req.grace = <%= @defaultgrace %>;
 <%- end -%>
+
+
+  # What to do with uncacheable-by-default responses. See http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.4
+  if ( beresp.ttl < 0s ) { 
+    set beresp.ttl = <%= @uncacheable_cache_time %>; 
+    return (hit_for_pass);
+  } 
   
   if (beresp.http.content-type ~ "<%- @gziptypes.each do |type| -%>^<%= type %><%- if type != @gziptypes[-1] -%>|<%-end-%><%-end-%>") {
      set beresp.do_gzip = true;
