@@ -44,6 +44,7 @@ class varnish::vcl (
   $cookiekeeps       = [ '__ac', '_ZopeId', 'captchasessionid', 'statusmessages', '__cp', 'MoodleSession'],
   $defaultgrace      = undef,
   $min_cache_time    = "60s",
+  $uncacheable_cache_time = "20s",
   $static_cache_time = "5m",
   $gziptypes         = [ 'text/', 'application/xml', 'application/rss', 'application/xhtml', 'application/javascript', 'application/x-javascript' ],
   $template          = undef,
