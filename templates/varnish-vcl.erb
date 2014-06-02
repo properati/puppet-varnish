@@ -146,7 +146,7 @@ sub vcl_fetch {
 
 
   # What to do with uncacheable-by-default responses. See http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.4
-  if ( beresp.ttl < 0s ) { 
+  if ( beresp.ttl < 0s  || beresp.http.status == 404) { 
     set beresp.ttl = <%= @uncacheable_cache_time %>; 
     return (deliver);
   } 
